@@ -111,7 +111,7 @@ const BANCO = {
     },
     {
       pergunta: "O que é Fé?",
-      frase:    "Fé é a ___SLOT0___ e a certeza de ___SLOT1___ que não se ___SLOT2___.",
+      frase:    "Fé é a ___SLOT0___ das coisas que se esperam e a prova das ___SLOT1___ que não se ___SLOT2___.",
       slots:    ["certeza", "coisas", "veem"],
       distratores: ["dúvida", "erros", "ouvem"]
     },
