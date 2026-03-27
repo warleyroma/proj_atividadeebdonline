@@ -1,0 +1,557 @@
+/* ================================================================
+   RESET & BASE
+================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+  overscroll-behavior: none;
+}
+
+/* ================================================================
+   ANIMAÇÕES
+================================================================ */
+.fade-in {
+  animation: fadeIn 0.35s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.feedback {
+  position: fixed;
+  top: max(20px, env(safe-area-inset-top, 20px));
+  right: 16px;
+  left: 16px;
+  max-width: 320px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  border-radius: 14px;
+  font-weight: bold;
+  font-size: 1rem;
+  animation: pop 0.3s ease;
+  color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  text-align: center;
+}
+
+@media (min-width: 420px) {
+  .feedback {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: auto;
+    min-width: 180px;
+  }
+}
+
+@keyframes pop {
+  from { transform: scale(0.6) translateX(-50%); opacity: 0; }
+  to   { transform: scale(1)   translateX(-50%); opacity: 1; }
+}
+
+@media (max-width: 419px) {
+  @keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+  }
+}
+
+/* ================================================================
+   INPUT
+================================================================ */
+.input {
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  background: #334155;
+  color: white;
+  outline: none;
+  border: 2px solid transparent;
+  transition: 0.2s;
+  font-size: 16px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.input::placeholder {
+  color: #64748b;
+}
+
+/* ================================================================
+   BOTÕES PRINCIPAIS
+================================================================ */
+.btn {
+  width: 100%;
+  background: #475569;
+  padding: 13px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.15s ease;
+  color: white;
+  cursor: pointer;
+  border: none;
+  display: block;
+  text-align: center;
+  line-height: 1.3;
+  min-height: 48px;
+  -webkit-appearance: none;
+  appearance: none;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  background: #3b82f6;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-sm {
+  width: 34px;
+  height: 34px;
+  min-height: 34px;
+  padding: 0;
+  border-radius: 8px;
+  font-size: 0.75rem;
+}
+
+.btnPrimario {
+  width: 100%;
+  background: #3b82f6;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: 0.2s;
+  color: white;
+  border: none;
+  min-height: 48px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.btnPrimario:hover {
+  background: #2563eb;
+  transform: scale(1.02);
+}
+
+.btnPrimario:active {
+  transform: scale(0.97);
+}
+
+.btn-success {
+  background: #22c55e;
+}
+.btn-success:hover { background: #16a34a; }
+
+.btn-error {
+  background: #ef4444;
+}
+.btn-error:hover { background: #dc2626; }
+
+/* ================================================================
+   CARD (FLASHCARD FLIP)
+================================================================ */
+.card {
+  perspective: 1000px;
+  width: 100%;
+  height: 130px;
+}
+
+@media (max-height: 600px) {
+  .card { height: 100px; }
+}
+
+.card-inner {
+  transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+  transform-style: preserve-3d;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-front,
+.card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px;
+  overflow: auto;
+}
+
+.card-front {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+}
+
+.card-back {
+  background: linear-gradient(135deg, #0f4c2a, #166534);
+  transform: rotateY(180deg);
+  font-size: 14px;
+  font-weight: normal;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* ================================================================
+   PARES (MATCHING)
+================================================================ */
+.parItem {
+  background: #475569;
+  padding: 10px 8px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.15s;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.2;
+  touch-action: manipulation;
+}
+
+.parItem:hover,
+.parItem:active {
+  background: #3b82f6;
+}
+
+/* ================================================================
+   LOGIN ICON
+================================================================ */
+.login-icon {
+  font-size: 3rem;
+  line-height: 1;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+/* ================================================================
+   FORCA — TECLADO MOBILE
+================================================================ */
+.forca-key {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.72rem;
+  background: #475569;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.15s;
+  touch-action: manipulation;
+  min-height: 30px;
+  -webkit-appearance: none;
+}
+
+@media (max-width: 380px) {
+  .forca-key {
+    width: 26px;
+    height: 26px;
+    font-size: 0.65rem;
+  }
+}
+
+/* ================================================================
+   MEMÓRIA — GRID
+================================================================ */
+.mem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 360px) {
+  .mem-grid { gap: 5px; }
+}
+
+.mem-card {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.15s;
+  user-select: none;
+  border: 2px solid #475569;
+  touch-action: manipulation;
+  min-height: 56px;
+}
+
+@media (max-width: 360px) {
+  .mem-card {
+    font-size: 0.95rem;
+    min-height: 48px;
+  }
+}
+
+/* ================================================================
+   ORDEM (DRAG & DROP)
+================================================================ */
+.ordem-item {
+  cursor: grab;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  touch-action: none;
+}
+
+.ordem-item:active {
+  cursor: grabbing;
+}
+
+/* ================================================================
+   GAME CONTAINER
+================================================================ */
+#game > div {
+  padding-bottom: env(safe-area-inset-bottom, 8px);
+}
+
+/* ================================================================
+   SCROLLBAR
+================================================================ */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+
+/* ================================================================
+   PROGRESS BAR
+================================================================ */
+.progress-bar-wrap {
+  width: 100%;
+  background: #334155;
+  border-radius: 999px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #3b82f6, #6366f1);
+  transition: width 0.5s ease;
+}
+
+/* ================================================================
+   RESPONSIVE TYPOGRAPHY
+================================================================ */
+@media (max-width: 380px) {
+  .text-3xl { font-size: 1.5rem !important; }
+  .text-2xl { font-size: 1.25rem !important; }
+  .text-xl  { font-size: 1.1rem !important; }
+  .text-lg  { font-size: 1rem !important; }
+}
+
+/* ================================================================
+   BANCO DE PALAVRAS — FLASHCARD
+================================================================ */
+.fc-banco {
+  min-height: 48px;
+  border: 2px dashed #334155;
+  border-radius: 12px;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 0.5rem;
+  transition: border-color 0.2s;
+}
+
+.fc-word {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #334155;
+  border: 1px solid #475569;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+  transition: 0.15s;
+  user-select: none;
+  touch-action: manipulation;
+  min-height: 36px;
+}
+
+.fc-word:active {
+  background: #1e40af;
+  transform: scale(0.96);
+}
+
+/* ================================================================
+   ANAGRAMA — LETRAS GRANDES
+================================================================ */
+.anagrama-word {
+  font-size: clamp(1.4rem, 7vw, 2rem);
+  letter-spacing: 0.15em;
+  word-break: break-all;
+}
+
+/* ================================================================
+   TIMER
+================================================================ */
+#tempo {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #facc15;
+  white-space: nowrap;
+}
+
+/* ================================================================
+   QUIZ OPTIONS GRID
+================================================================ */
+.quiz-grid {
+  display: grid;
+  gap: 10px;
+}
+
+@media (max-width: 360px) {
+  .quiz-grid { gap: 7px; }
+  .quiz-grid .btn { padding: 10px 8px; font-size: 0.82rem; }
+}
+
+/* ================================================================
+   PALAVRAS CRUZADAS — GRADE
+================================================================ */
+.pc-grid-wrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+.pc-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.pc-cell {
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  color: white;
+  font-size: clamp(0.6rem, 3vw, 1rem);
+  user-select: none;
+  padding: 0;
+  line-height: 1;
+}
+
+.pc-cell::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.pc-cell .pc-cell-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pc-cell-vazia {
+  background: #0f172a;
+  border: none;
+}
+
+.pc-cell-edit {
+  background: #1e293b;
+  border: 1px solid #334155;
+  cursor: pointer;
+}
+.pc-cell-edit:active { background: #2d3f57; }
+
+.pc-cell-ativa {
+  background: #1e40af !important;
+  border-color: #3b82f6 !important;
+}
+
+.pc-cell-word {
+  background: #1e3a5f !important;
+}
+
+.pc-cell-certa  { background: #14532d !important; }
+.pc-cell-errada { background: #7f1d1d !important; }
+
+.pc-num {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: clamp(5px, 1.5vw, 9px);
+  color: #94a3b8;
+  line-height: 1;
+  font-weight: normal;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.pc-letter {
+  font-weight: bold;
+  font-size: clamp(0.8rem, 4vw, 1.2rem);
+  text-transform: uppercase;
+}
+
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
