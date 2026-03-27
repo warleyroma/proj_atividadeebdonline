@@ -24,7 +24,9 @@ const BANCO = {
     { pergunta: "Israel foi escolhido por:",             opcoes: ["Deus", "Homem", "Seus reis"], correta: 0 },
     { pergunta: "A santificação é:",                     opcoes: ["Um processo", "Evento único", "Um ritual"], correta: 0 },
     { pergunta: "A salvação é um:",                      opcoes: ["Dom de Deus", "Pagamento", "Esforço"], correta: 0 },
-    { pergunta: "A Bíblia é:",                           opcoes: ["Palavra de Deus", "Livro comum", "História humana"], correta: 0 }
+    { pergunta: "A Bíblia é:",                           opcoes: ["Palavra de Deus", "Livro comum", "História humana"], correta: 0 },
+    { pergunta: "A santificação é:",                     opcoes: ["Condição indispensável para contemplar a face de Deus", "Uma opção secundária na vida cristã", "Apenas um símbolo sem importância"
+  ], correta: 0 }
   ],
   anagrama: [
     { embaralhado: "ODAEPC",       resposta: "PECADO" },
@@ -52,7 +54,9 @@ const BANCO = {
     { pergunta: "Jesus é o único caminho",        correta: true  },
     { pergunta: "O pecado não tem consequências", correta: false },
     { pergunta: "A fé gera obediência",           correta: true  },
-    { pergunta: "Deus rejeita o arrependido",     correta: false }
+    { pergunta: "Deus rejeita o arrependido",     correta: false },
+    { pergunta: "A santificação é um processo contínuo na vida do cristão.", correta: true },
+    { pergunta: "A santificação acontece apenas no momento da conversão.", correta: false }
   ],
   forca: [
     { dica: "Quem nos salva?",                resposta: "JESUS" },
@@ -63,7 +67,9 @@ const BANCO = {
     { dica: "O que Cristo oferece",           resposta: "VIDA" },
     { dica: "Instrumento da morte de Cristo", resposta: "CRUZ" },
     { dica: "Sentimento divino",              resposta: "AMOR" },
-    { dica: "Parte espiritual do homem",      resposta: "ALMA" }
+    { dica: "Animal que enganou eva",      resposta: "SERPENTE" },
+    { dica: "Qual fruto Deus proibiu que fosse comido no jardim do eden",      resposta: "DO BEM E DO MAL" },
+     { dica: "Separado do mal",      resposta: "SANTO" },
   ],
   soletrar: ["SALVACAO","PECADO","GRACA","FE","CRUZ","DEUS","JESUS","VIDA","AMOR","ALMA","REINO","VERDADE"],
   cruzadinha: [
@@ -73,11 +79,12 @@ const BANCO = {
     { dica: "Erro do homem",                  resposta: "PECADO" },
     { dica: "Instrumento de morte de Cristo", resposta: "CRUZ" },
     { dica: "Criador de tudo",                resposta: "DEUS" },
-    { dica: "Vida eterna",                    resposta: "VIDA" },
+    { dica: "Vida eterna",                    resposta: "SALVACAO" },
     { dica: "Sentimento divino",              resposta: "AMOR" },
-    { dica: "Dom de Deus",                    resposta: "SALVACAO" },
+    { dica: "Ato judicial divino",            resposta: "JUSTIFICACAO" },
     { dica: "Caminho correto",                resposta: "VERDADE" },
-    { dica: "Lugar de Deus",                  resposta: "REINO" }
+    { dica: "Transgressão contra Deus",       resposta: "PECADO" },
+    { dica: "Trazer a vida o que estava morto", resposta: "REGERENARACAO" }
   ],
   pares: [
     { dica: "Meio de salvação",               resposta: "FÉ" },
@@ -86,8 +93,9 @@ const BANCO = {
     { dica: "Erro do homem",                  resposta: "PECADO" },
     { dica: "Instrumento de morte de Cristo", resposta: "CRUZ" },
     { dica: "Criador de tudo",                resposta: "DEUS" },
-    { dica: "Vida eterna",                    resposta: "VIDA" },
-    { dica: "Sentimento divino",              resposta: "AMOR" }
+    { dica: "Vida eterna",                    resposta: "SALVACAO" },
+    { dica: "Sentimento divino",              resposta: "AMOR" },
+    { dica: "Inimigo das nossas almas",       resposta: "DIABO" }
   ],
   ordem: {
     label: "Coloque na ordem certa:",
@@ -130,7 +138,35 @@ const BANCO = {
       frase:    "Arrependimento é a ___SLOT0___ de mente que leva a ___SLOT1___ o ___SLOT2___.",
       slots:    ["mudança", "abandonar", "pecado"],
       distratores: ["firmeza", "amar", "mundo"]
-    }
+    },
+    {
+  pergunta: "O que ensina Gênesis 1:27?",
+  frase: "Deus criou o homem à sua ___SLOT0___, conforme a sua ___SLOT1___.",
+  slots: ["imagem", "semelhança"],
+  distratores: ["forma", "natureza", "aparência"],
+  referencia: "Gênesis 1:27"
+},
+  {
+  pergunta: "O que ensina Romanos 3:23?",
+  frase: "Pois todos ___SLOT0___ e carecem da ___SLOT1___ de Deus.",
+  slots: ["pecaram", "glória"],
+  distratores: ["viveram", "presença", "força"],
+  referencia: "Romanos 3:23"
+},
+    {
+  pergunta: "O que ensina Gálatas 4:4?",
+  frase: "Vindo a plenitude do tempo, Deus enviou seu ___SLOT0___, nascido de ___SLOT1___.",
+  slots: ["Filho", "mulher"],
+  distratores: ["servo", "homem", "terra"],
+  referencia: "Gálatas 4:4"
+},
+    {
+  pergunta: "O que ensina Colossenses 1:13-14?",
+  frase: "Ele nos tirou do poder das ___SLOT0___ e nos transportou para o reino do seu ___SLOT1___ amado.",
+  slots: ["trevas", "Filho"],
+  distratores: ["sombras", "Senhor", "espírito"],
+  referencia: "Colossenses 1:13-14"
+}
   ]
 };
 
@@ -206,9 +242,9 @@ const _PC_BANCO = [
   { palavra: "SALVACAO", dica: "Dom de Deus ao homem"      },
   { palavra: "AMOR",     dica: "Sentimento divino"         },
   { palavra: "VERDADE",  dica: "O que liberta"             },
-  { palavra: "REINO",    dica: "Lugar de Deus"             },
+  { palavra: "DIABO",    dica: "o tentador"             },
   { palavra: "CRUZ",     dica: "Instrumento de redenção"   },
-  { palavra: "ALMA",     dica: "Parte espiritual do homem" },
+  { palavra: "SANTIFICACAO",     dica: "Processo continuo na vida do crente" },
   { palavra: "VIDA",     dica: "Dom que Cristo oferece"    },
   { palavra: "LUZ",      dica: "Cristo é a nossa ___"      },
   { palavra: "PAZ",      dica: "Fruto do Espírito"         },
@@ -217,135 +253,8 @@ const _PC_BANCO = [
   { palavra: "PROFETA",  dica: "Porta-voz de Deus"         },
   { palavra: "BATISMO",  dica: "Rito de iniciação cristã"  },
   { palavra: "PARAISO",  dica: "Morada eterna dos salvos"  },
-  { palavra: "APOSTOLO", dica: "Enviado de Cristo"         }
+  { palavra: "SANTO", dica: "Separado do mal"         }
 ];
-
-/**
-// =====================================================================
-// SUPABASE FUNCTIONS
-// =====================================================================
-async function salvarPontuacao(nome, pontos) {
-  try {
-    const { data, error } = await supabaseClient
-      .from('pontuacoes')
-      .insert([{ nome: nome, pontos: pontos, data_jogo: new Date().toISOString() }]);
-    
-    if (error) {
-      console.error('Erro ao salvar no Supabase:', error);
-      salvarRankingLocal();
-    }
-  } catch (err) {
-    console.error('Erro de conexão com Supabase:', err);
-    salvarRankingLocal();
-  }
-}
-
-function salvarRankingLocal() {
-  try {
-    const r = JSON.parse(localStorage.getItem("rank") || "[]");
-    r.push({ nome: estado.nome, pontos: estado.pontos });
-    r.sort((a, b) => b.pontos - a.pontos);
-    localStorage.setItem("rank", JSON.stringify(r.slice(0, 20)));
-  } catch (_) {}
-}
-
-async function carregarRankingGlobal() {
-  const loadingEl = document.getElementById("ranking-loading");
-  if (loadingEl) loadingEl.classList.remove("hidden");
-  
-  try {
-    const { data, error } = await supabaseClient
-      .from('pontuacoes')
-      .select('nome, pontos')
-      .order('pontos', { ascending: false })
-      .limit(20);
-    
-    if (loadingEl) loadingEl.classList.add("hidden");
-    
-    if (error) {
-      console.error('Erro ao carregar ranking:', error);
-      carregarRankingLocal();
-      return;
-    }
-    
-    if (data && data.length > 0) {
-      const lista = document.getElementById("listaRanking");
-      if (lista) {
-        lista.innerHTML = data.map((p, i) =>
-          `<li class="bg-slate-700 p-3 rounded-xl flex justify-between items-center">
-             <span class="font-semibold">${i + 1}. ${p.nome}</span>
-             <span class="text-yellow-400 font-bold">${p.pontos} pts</span>
-           </li>`
-        ).join("");
-      }
-    } else {
-      carregarRankingLocal();
-    }
-  } catch (err) {
-    if (loadingEl) loadingEl.classList.add("hidden");
-    console.error('Erro ao carregar ranking global:', err);
-    carregarRankingLocal();
-  }
-}
-
-function carregarRankingLocal() {
-  try {
-    const r = JSON.parse(localStorage.getItem("rank") || "[]");
-    const lista = document.getElementById("listaRanking");
-    if (lista) {
-      lista.innerHTML = r.length
-        ? r.map((p, i) =>
-            `<li class="bg-slate-700 p-3 rounded-xl flex justify-between items-center">
-               <span class="font-semibold">${i + 1}. ${p.nome}</span>
-               <span class="text-yellow-400 font-bold">${p.pontos} pts</span>
-             </li>`
-          ).join("")
-        : `<li class="text-slate-400 text-center py-4">Nenhum resultado ainda.</li>`;
-    }
-  } catch (_) {
-    const lista = document.getElementById("listaRanking");
-    if (lista) lista.innerHTML = `<li class="text-slate-400 text-center py-4">Nenhum resultado ainda.</li>`;
-  }
-}
-
-async function verificarPosicaoNoRanking(pontos) {
-  try {
-    const { data, error } = await supabaseClient
-      .from('pontuacoes')
-      .select('pontos')
-      .gte('pontos', pontos);
-    
-    if (!error && data) {
-      const posicao = data.length;
-      const { count } = await supabaseClient.from('pontuacoes').select('*', { count: 'exact', head: true });
-      const totalJogadores = count || 0;
-      
-      const posEl = document.getElementById("ranking-position");
-      if (posEl) {
-        posEl.innerHTML = `🏆 Você ficou em ${posicao}º lugar entre ${totalJogadores} jogadores! 🏆`;
-      }
-    }
-  } catch (err) {
-    console.error('Erro ao verificar posição:', err);
-  }
-}
-
-function verRankingGlobal() {
-  document.getElementById("final")?.classList.add("hidden");
-  document.getElementById("login")?.classList.add("hidden");
-  document.getElementById("game")?.classList.add("hidden");
-  document.getElementById("ranking")?.classList.remove("hidden");
-  carregarRankingGlobal();
-}
-
-function voltarLogin() {
-  document.getElementById("ranking")?.classList.add("hidden");
-  document.getElementById("login")?.classList.remove("hidden");
-  document.getElementById("game")?.classList.add("hidden");
-  document.getElementById("final")?.classList.add("hidden");
-}
-
-*/
 
 // =====================================================================
 // SUPABASE + SYNC (LOCAL + ONLINE)
